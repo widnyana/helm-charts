@@ -1,0 +1,26 @@
+namespace: ""
+
+AppProject: {}
+
+Application:
+  name: "name of the application"
+  metadata:
+    annotations:
+      ## To send Slack notifications when a resource is deleted in Argo CD.
+      # notifications.argoproj.io/subscribe.on-deleted.slack: argocd-notif-channel
+      ## To send Slack notifications when a deployment is completed in Argo CD.
+      # notifications.argoproj.io/subscribe.on-deployed.slack: argocd-notif-channel
+      ## To send Slack notifications when the health of a resource degrades in Argo CD.
+      # notifications.argoproj.io/subscribe.on-health-degraded.slack: argocd-notif-channel
+      ## To send Slack notifications when a synchronization fails in Argo CD.
+      # notifications.argoproj.io/subscribe.on-sync-failed.slack: argocd-notif-channel
+      ## To send Slack notifications when the synchronization status becomes unknown in Argo CD.
+      # notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: argocd-notif-channel
+      ## To send Slack notifications when a synchronization succeeds in Argo CD.
+      # notifications.argoproj.io/subscribe.on-sync-succeeded.slack: argocd-notif-channel
+  project: "project-name"
+  repoURL: https://github.com/username/reponame"
+  helm:
+    valueFiles:
+      - values-one.yaml
+      - values-two.yaml
