@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+tasks:
+  upgrade:
+    desc: Render chart templates based on default values.
+    cmds:
+      - helm upgrade --install --namespace {{.CLI_ARGS}} --create-namespace {{.CLI_ARGS}} ./charts/{{.CLI_ARGS}} --debug --values ./charts/{{.CLI_ARGS}}/values.yaml
+  
+  template:
+    desc: Render chart templates based on default values.
+    cmds:
+      - helm template {{.CLI_ARGS}} ./charts/{{.CLI_ARGS}} --debug --values ./charts/{{.CLI_ARGS}}/values.yaml | pbcopy
+
+  update:
+    desc: Update chart dependencies based on Chart.yaml file.
+    dir: charts/{{.CLI_ARGS}}
+    cmds:
+      - helm dependency update
+
+  build:
+    desc: Build chart dependencies based on Chart.lock file.
+    dir: charts/{{.CLI_ARGS}}
+    cmds:
+      - helm dependency build
+
+  docs:
+    desc: Generate Helm chart documentation.
+    cmds:
+      - helm-docs --chart-search-root {{.CHART_SEARCH_ROOT}} --template-files README.md.tmpl
+    vars:
+      CHART_SEARCH_ROOT:
+        sh: dirname {{ default "./charts/xyz" .CLI_ARGS}} | head -n 1

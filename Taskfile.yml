@@ -1,0 +1,21 @@
+version: '3'
+
+includes:
+  docs: ./scripts/taskfiles/docs.yaml
+  chart: ./scripts/taskfiles/chart.yaml
+
+tasks:
+  docs:
+    desc: Documentation specific tasks.
+    cmds:
+      - task: docs:default
+      - for chart in charts/*; do cp $chart/README.md docs/$chart.md; done
+      - cp -f .cr-index/index.yaml docs/index.yaml || curl https://{{.PROD_DOMAIN}}/index.yaml --output docs/index.yaml
+
+  default: 
+    cmd: task --list-all
+    desc: Listing all available tasks
+
+  lock-requirements:
+    cmd: uv pip compile pyproject.toml -o docs/requirements.txt
+    desc: Lock the requirements.txt; used by mhausenblas/mkdocs-deploy-gh-pages

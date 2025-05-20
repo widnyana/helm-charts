@@ -1,0 +1,24 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task: default-pages
+    desc: Default action for docs; populating default pages
+
+  # prepare default documentation pages
+  default-pages:
+    cmds:
+      - cat README.md > docs/index.md
+      - echo "---" > docs/LICENSE.md
+      - echo "hide:" >> docs/LICENSE.md
+      - echo "  - navigation" >> docs/LICENSE.md
+      - echo "---" >> docs/LICENSE.md
+      - cat LICENSE.md >> docs/LICENSE.md
+    desc: Construct a default pages
+
+  # serve documentation for development purposes
+  serve:
+    cmds:
+      - podman run --rm -it -p 8000:8000 -v $(pwd):/docs squidfunk/mkdocs-material:9
+    desc: Serve the site via Podman Container

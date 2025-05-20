@@ -1,0 +1,55 @@
+name: Release Charts
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release Charts
+    runs-on: ubuntu-latest
+    steps:
+      # checkout
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+
+      # setup helm
+      - uses: azure/setup-helm@v3.5
+        with:
+          version: v3.8.1
+
+      # setup taskfile
+      - uses: arduino/setup-task@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # setup cache for social cards
+      - uses: actions/cache@v4
+        with:
+          key: ${{ github.ref }}
+          path: .cache
+
+      # configure git
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      # deploy charts
+      - uses: helm/chart-releaser-action@v1.7.0
+        env:
+          CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CR_SKIP_EXISTING: 'true'
+
+      # create pages for docs
+      - name: Create pages for docs
+        run: task docs
+        env:
+          PROD_DOMAIN: ${{ secrets.PROD_DOMAIN }}
+
+      # deploy docs
+      - uses: mhausenblas/mkdocs-deploy-gh-pages@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REQUIREMENTS: docs/requirements.txt

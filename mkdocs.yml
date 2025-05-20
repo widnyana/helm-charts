@@ -1,0 +1,97 @@
+# project
+site_name: Helm Charts
+site_description: A repository with lightweight Helm Charts.
+site_author: Widnyana
+site_url: https://charts.widnyana.web.id
+
+# repository
+repo_name: widnyana/helm-charts
+repo_url: https://github.com/widnyana/helm-charts
+
+# theme
+theme:
+  name: material
+  logo: assets/helm-logo.svg
+  favicon: assets/favicon.png
+  language: en
+  palette:
+    - scheme: default
+      media: "(prefers-color-scheme: light)"
+      toggle:
+        icon: material/brightness-2
+        name: Switch to dark mode
+    - scheme: slate
+      primary: green
+      accent: teal
+      media: "(prefers-color-scheme: dark)"
+      toggle:
+        icon: material/brightness-6
+        name: Switch to light mode
+  font:
+    text: Lato
+    code: Source Code Pro
+  icon:
+    repo: fontawesome/brands/git-alt
+  features:
+    - content.code.annotate
+    - content.tabs.link
+    - navigation.footer
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.sections
+    - navigation.tracking
+    - navigation.top
+    - toc.follow
+    - toc.integrate
+    - search.highlight
+
+# navigation
+nav:
+  - Introduction: index.md
+  - Charts:
+    - charts/argocd-config.md
+
+
+# socials
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/widnyana
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/widnyana_
+    - icon: fontawesome/brands/bluesky
+      link: https://bsky.app/profile/widnyana.web.id
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/u/widnyana
+
+# customizations
+extra_css:
+  - styles/custom.css
+
+# additional plugins
+plugins:
+  - minify
+  - search
+  - social
+  - tags:
+      enabled: true
+
+# code highlighting
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true

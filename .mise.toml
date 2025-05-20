@@ -1,0 +1,14 @@
+[env]
+_.python.venv = { path = "{{config_root}}/.venv", create = true }
+ROOT_DIR = "{{config_root}}"
+
+[tools]
+"aqua:go-task/task" = "3.43.3"
+python = "3.13.3"
+"ubi:helm/chart-releaser" = { version = "1.7.0", exe = "cr" }
+"ubi:norwoodj/helm-docs" = "1.14.2"
+
+
+[hooks.enter]
+shell = "zsh"
+script = "source $ROOT_DIR/scripts/hooks/enter.sh"

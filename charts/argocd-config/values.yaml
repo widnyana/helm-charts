@@ -1,10 +1,16 @@
+# -- Namespace the chart will be deployed to
 namespace: ""
 
+# -- Name of the ArgoCD AppProject
 AppProject: {}
 
+# -- Application details
 Application:
-  name: "name of the application"
+  #  -- Name of the application
+  name: "app-name"
   metadata:
+    # -- Annotations for the Application.
+    # you can define the notification here
     annotations:
       ## To send Slack notifications when a resource is deleted in Argo CD.
       # notifications.argoproj.io/subscribe.on-deleted.slack: argocd-notif-channel
@@ -18,9 +24,14 @@ Application:
       # notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: argocd-notif-channel
       ## To send Slack notifications when a synchronization succeeds in Argo CD.
       # notifications.argoproj.io/subscribe.on-sync-succeeded.slack: argocd-notif-channel
+  
+  # -- the project name
   project: "project-name"
-  repoURL: https://github.com/username/reponame"
+  # -- url of the project repository
+  repoURL: https://github.com/username/reponame
+  # -- Helm Related configuration
   helm:
+    # -- Value files to apply
     valueFiles:
       - values-one.yaml
       - values-two.yaml

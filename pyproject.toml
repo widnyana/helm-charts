@@ -1,0 +1,12 @@
+[project]
+name = "helm-charts"
+version = "0.1.0"
+description = "A repository with lightweight Helm Charts"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "material-plausible-plugin>=0.3.0",
+    "mkdocs>=1.6.1",
+    "mkdocs-material[imaging]>=9.6.14",
+    "mkdocs-minify-plugin>=0.8.0",
+]
